@@ -12,16 +12,8 @@ sudo apt-get install build-essential libssl-dev --assume-yes
 # redis
 #
 figlet -f standard Redis [1/7]
-sudo apt-get install tcl8.5 --assume-yes
-wget http://download.redis.io/releases/redis-stable.tar.gz
-tar xzf redis-stable.tar.gz
-cd redis-stable
-make
-make test
-sudo make install
-cd utils
-echo -n | sudo ./install_server.sh
-cd ~
+sudo apt-get install redis-server --assume-yes
+sudo service redis-server stop
 #
 # git
 #
@@ -36,6 +28,7 @@ sudo apt-get install -y nodejs --assume-yes
 #
 # nvm
 #
+cd ~
 figlet -f standard NVM [4/7]
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 export NVM_DIR="/home/vagrant/.nvm"
@@ -54,6 +47,7 @@ cd ff
 #
 # FF Server
 #
+sudo service redis-server start
 figlet -f standard FF Server [6/7]
 git clone -b stable https://github.com/FreeFeed/freefeed-server 
 cd freefeed-server
@@ -79,10 +73,7 @@ npm test
 cat << EOF
 
 
-FreeFeed dev. environment provisioning has been completed.
-
-Please reboot the box (vagrant ssh, sudo reboot) before starting the sever,
-so that redis could start.
+FreeFeed devevlopment environment provisioning has been completed.
 
 Launching FreeFeed server:
   cd ~/ff/freefeed-server
