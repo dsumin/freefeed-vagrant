@@ -13,7 +13,9 @@ sudo apt-get install build-essential libssl-dev --assume-yes
 #
 figlet -f standard Redis [1/7]
 sudo apt-get install redis-server --assume-yes
-sudo service redis-server stop
+sudo service redis-server restart
+sleep 5
+sudo redis-cli ping
 #
 # git
 #
@@ -47,7 +49,6 @@ cd ff
 #
 # FF Server
 #
-sudo service redis-server start
 figlet -f standard FF Server [6/7]
 git clone -b stable https://github.com/FreeFeed/freefeed-server 
 cd freefeed-server
